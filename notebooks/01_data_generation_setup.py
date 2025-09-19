@@ -1,34 +1,34 @@
 # Databricks notebook source
 # MAGIC %md 
 # MAGIC # Retail Demand Forecasting - Data Foundation Setup
-# MAGIC 
+# MAGIC
 # MAGIC ## 🏪 Industry Challenge
-# MAGIC 
+# MAGIC
 # MAGIC **Retail organizations lose millions annually due to poor demand planning:**
 # MAGIC - **$1.1 trillion globally** lost to out-of-stock scenarios
 # MAGIC - **20-40%** of inventory investment tied up in slow-moving stock
 # MAGIC - **65%** of retailers struggle with demand volatility
 # MAGIC - **Manual forecasting** leads to 40-50% forecast errors
-# MAGIC 
+# MAGIC
 # MAGIC ## 🎯 Solution Overview
-# MAGIC 
+# MAGIC
 # MAGIC This solution demonstrates **enterprise-grade demand forecasting** for retail operations:
 # MAGIC - **Accurate demand predictions** across thousands of store-item combinations
 # MAGIC - **Seasonal pattern recognition** for holiday and promotional planning
 # MAGIC - **Inventory optimization** to reduce stockouts and overstock
 # MAGIC - **Supply chain efficiency** through data-driven insights
-# MAGIC 
+# MAGIC
 # MAGIC ## 📊 Business Process Flow
-# MAGIC 
+# MAGIC
 # MAGIC ```
 # MAGIC ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 # MAGIC │  Data Foundation│───▶│ Forecast Models │───▶│Business Insights│
 # MAGIC │  (This step)    │    │ (Next step)     │    │ (Final step)    │
 # MAGIC └─────────────────┘    └─────────────────┘    └─────────────────┘
 # MAGIC ```
-# MAGIC 
+# MAGIC
 # MAGIC ## 💰 Expected Business Impact
-# MAGIC 
+# MAGIC
 # MAGIC - **15-25% reduction** in inventory holding costs
 # MAGIC - **30-50% fewer stockouts** leading to increased sales
 # MAGIC - **10-20% improvement** in forecast accuracy
@@ -37,7 +37,7 @@
 # COMMAND ----------
 
 # MAGIC %md ## 📦 Environment Setup
-# MAGIC 
+# MAGIC
 # MAGIC Setting up the forecasting environment with industry-standard time series libraries.
 # MAGIC The platform automatically manages compute resources for cost efficiency.
 
@@ -45,7 +45,7 @@
 
 # DBTITLE 1,Install Required Libraries
 # Install libraries for serverless compute
-# MAGIC %pip install prophet>=1.1.5 plotly>=5.17.0 scikit-learn>=1.3.0
+%pip install prophet>=1.1.5 plotly>=5.17.0 scikit-learn>=1.3.0
 
 # COMMAND ----------
 
@@ -55,7 +55,7 @@ dbutils.library.restartPython()
 # COMMAND ----------
 
 # MAGIC %md ## ⚙️ Retail Business Configuration
-# MAGIC 
+# MAGIC
 # MAGIC ### Store and Product Portfolio Setup
 # MAGIC Configure the scope of your retail forecasting analysis based on your business needs.
 
@@ -76,8 +76,15 @@ print("📚 Libraries imported successfully")
 
 # DBTITLE 1,Configure Pipeline Parameters
 # Get parameters from job or use defaults
-catalog_name = dbutils.widgets.get("catalog_name") if dbutils.widgets.get("catalog_name") else "dev_demand_forecasting"
-schema_name = dbutils.widgets.get("schema_name") if dbutils.widgets.get("schema_name") else "forecasting"
+try:
+    catalog_name = dbutils.widgets.get("catalog_name")
+except Exception:
+    catalog_name = "dev_demand_forecasting"
+
+try:
+    schema_name = dbutils.widgets.get("schema_name")
+except Exception:
+    schema_name = "forecasting"
 
 # Data generation parameters - optimized for faster execution
 NUM_STORES = 5   # Reduced from 10 for faster processing
@@ -98,7 +105,7 @@ spark = SparkSession.builder.getOrCreate()
 # COMMAND ----------
 
 # MAGIC %md ## 🏛️ Enterprise Data Foundation
-# MAGIC 
+# MAGIC
 # MAGIC ### Retail Data Architecture
 # MAGIC Setting up secure, governed data infrastructure for enterprise forecasting:
 # MAGIC - **Data governance** with role-based access controls
@@ -167,7 +174,7 @@ print("✅ Retail data tables ready for forecasting")
 # COMMAND ----------
 
 # MAGIC %md ## 🎲 Realistic Sales Data Simulation
-# MAGIC 
+# MAGIC
 # MAGIC ### Creating Authentic Retail Patterns
 # MAGIC Our synthetic sales data replicates real-world retail behavior:
 # MAGIC - **Seasonal demand cycles** (holiday rushes, back-to-school)
@@ -315,7 +322,7 @@ print(f"📊 Rows written: {final_df.count():,}")
 # COMMAND ----------
 
 # MAGIC %md ## 📊 Retail Data Quality Assessment
-# MAGIC 
+# MAGIC
 # MAGIC ### Sales Data Validation
 # MAGIC Ensuring our retail sales data meets enterprise standards for accurate forecasting.
 
@@ -361,27 +368,27 @@ print("\n🎯 Retail sales data validated and ready for demand forecasting!")
 # COMMAND ----------
 
 # MAGIC %md ## 📋 Foundation Complete - Next Steps
-# MAGIC 
+# MAGIC
 # MAGIC ### ✅ Data Foundation Established:
-# MAGIC 
+# MAGIC
 # MAGIC 1. **🏛️ Enterprise Data Architecture**: Secure, governed retail data platform
 # MAGIC 2. **📊 Sales Data Repository**: 6+ years of realistic transaction history
 # MAGIC 3. **🎲 Realistic Business Patterns**: Seasonal, geographic, and product variations
 # MAGIC 4. **✅ Data Quality Assurance**: Enterprise-grade validation and monitoring
 # MAGIC 5. **⚡ Scalable Infrastructure**: Cloud-native, auto-scaling architecture
-# MAGIC 
+# MAGIC
 # MAGIC ### 🔄 Forecasting Pipeline:
-# MAGIC 
+# MAGIC
 # MAGIC **Next: AI-Powered Demand Modeling**
 # MAGIC - Advanced machine learning for demand prediction
 # MAGIC - Store and product-specific forecast models
 # MAGIC - Confidence intervals for risk management
-# MAGIC 
+# MAGIC
 # MAGIC **Finally: Business Intelligence & Actions**  
 # MAGIC - Executive dashboards and KPI monitoring
 # MAGIC - Inventory optimization recommendations
 # MAGIC - Supply chain planning insights
-# MAGIC 
+# MAGIC
 # MAGIC ### 📍 Business Data Assets:
 # MAGIC ```
 # MAGIC Enterprise Catalog: {catalog_name}
@@ -392,9 +399,9 @@ print("\n🎯 Retail sales data validated and ready for demand forecasting!")
 # COMMAND ----------
 
 # MAGIC %md ## 🎉 Ready for Demand Forecasting
-# MAGIC 
+# MAGIC
 # MAGIC **Your retail sales data foundation is operational!**
-# MAGIC 
+# MAGIC
 # MAGIC Ready to apply advanced machine learning for accurate demand predictions across your entire product portfolio.
 
 # COMMAND ----------

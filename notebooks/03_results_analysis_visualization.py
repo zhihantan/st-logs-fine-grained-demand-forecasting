@@ -1,26 +1,26 @@
 # Databricks notebook source
 # MAGIC %md 
 # MAGIC # Executive Intelligence Dashboard - Transforming Forecasts into Action
-# MAGIC 
+# MAGIC
 # MAGIC ## 💼 Strategic Business Intelligence
-# MAGIC 
+# MAGIC
 # MAGIC Transform AI-powered demand predictions into **immediate business value** and competitive advantage:
 # MAGIC - **Executive KPI dashboards** for C-level decision making
 # MAGIC - **Inventory optimization strategies** to reduce costs and improve service
 # MAGIC - **Supply chain intelligence** for operational excellence
 # MAGIC - **Revenue impact analysis** and ROI quantification
-# MAGIC 
+# MAGIC
 # MAGIC ## 🎯 From Predictions to Profits
-# MAGIC 
+# MAGIC
 # MAGIC ```
 # MAGIC ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 # MAGIC │  Sales History  │───▶│  AI Predictions │───▶│Executive Actions│
 # MAGIC │  ✅ Foundation  │    │  ✅ Generated   │    │ 🔄 Your Impact  │
 # MAGIC └─────────────────┘    └─────────────────┘    └─────────────────┘
 # MAGIC ```
-# MAGIC 
+# MAGIC
 # MAGIC ## 💰 Measurable Business Outcomes
-# MAGIC 
+# MAGIC
 # MAGIC - **Cost Reduction**: Optimize inventory investment by 15-25%
 # MAGIC - **Revenue Growth**: Eliminate stockouts worth millions in lost sales
 # MAGIC - **Operational Excellence**: Replace manual forecasting with AI automation
@@ -35,7 +35,7 @@
 
 # DBTITLE 1,Install Required Libraries
 # Install libraries for serverless compute
-# MAGIC %pip install prophet>=1.1.5 plotly>=5.17.0 scikit-learn>=1.3.0
+%pip install prophet>=1.1.5 plotly>=5.17.0 scikit-learn>=1.3.0
 
 # COMMAND ----------
 
@@ -67,8 +67,15 @@ print("📚 Libraries imported successfully")
 
 # DBTITLE 1,Configure Analysis Parameters
 # Get parameters from job or use defaults
-catalog_name = dbutils.widgets.get("catalog_name") if dbutils.widgets.get("catalog_name") else "dev_demand_forecasting"
-schema_name = dbutils.widgets.get("schema_name") if dbutils.widgets.get("schema_name") else "forecasting"
+try:
+    catalog_name = dbutils.widgets.get("catalog_name")
+except Exception:
+    catalog_name = "dev_demand_forecasting"
+
+try:
+    schema_name = dbutils.widgets.get("schema_name")
+except Exception:
+    schema_name = "forecasting"
 
 print("🔧 Executive Intelligence Setup:")
 print(f"   💼 Business data source: {catalog_name}")
@@ -81,7 +88,7 @@ spark = SparkSession.builder.getOrCreate()
 # COMMAND ----------
 
 # MAGIC %md ## 📊 Access AI-Generated Business Intelligence
-# MAGIC 
+# MAGIC
 # MAGIC ### Transform Predictions into Executive Insights
 # MAGIC Access your AI-generated demand forecasts and convert them into actionable business intelligence for strategic decision making.
 
@@ -140,7 +147,7 @@ else:
 # COMMAND ----------
 
 # MAGIC %md ## 📈 Executive KPI Dashboard
-# MAGIC 
+# MAGIC
 # MAGIC ### Strategic Performance Metrics for Leadership
 # MAGIC Generate C-level KPIs that directly impact profitability, customer satisfaction, and operational efficiency.
 
@@ -207,7 +214,7 @@ else:
 # COMMAND ----------
 
 # MAGIC %md ## 📊 Executive Data Visualization
-# MAGIC 
+# MAGIC
 # MAGIC ### Interactive Dashboards for Strategic Decision Making
 
 # COMMAND ----------
@@ -350,7 +357,7 @@ if forecast_count > 0:
 # COMMAND ----------
 
 # MAGIC %md ## 🎯 AI Prediction Confidence Assessment
-# MAGIC 
+# MAGIC
 # MAGIC ### Business Risk & Reliability Analysis
 # MAGIC Assess the confidence and reliability of AI predictions to guide strategic inventory and supply chain decisions.
 
@@ -401,7 +408,7 @@ if forecast_count > 0:
 # COMMAND ----------
 
 # MAGIC %md ## 💡 Strategic Action Plan
-# MAGIC 
+# MAGIC
 # MAGIC ### Executive Recommendations for Immediate Implementation
 
 # COMMAND ----------
@@ -479,7 +486,7 @@ else:
 # COMMAND ----------
 
 # MAGIC %md ## 📋 Executive Summary
-# MAGIC 
+# MAGIC
 # MAGIC ### Key Findings and Business Impact
 
 # COMMAND ----------
@@ -537,30 +544,30 @@ print(f"Ready to revolutionize your supply chain and inventory operations.")
 # COMMAND ----------
 
 # MAGIC %md ## 📋 Summary & Implementation Guide
-# MAGIC 
+# MAGIC
 # MAGIC ### ✅ Executive Intelligence Delivered:
-# MAGIC 
+# MAGIC
 # MAGIC 1. **💼 C-Level KPI Dashboard**: Strategic metrics driving profitability decisions
 # MAGIC 2. **📊 Interactive Executive Charts**: Visual insights for board presentations
 # MAGIC 3. **🏪 Multi-Location Performance**: Comparative analysis across store portfolio
 # MAGIC 4. **🎯 Risk Assessment Framework**: Confidence-based inventory planning
 # MAGIC 5. **💡 Strategic Action Plan**: Immediate implementation roadmap
 # MAGIC 6. **📈 ROI & Business Case**: Quantified financial impact and competitive advantage
-# MAGIC 
+# MAGIC
 # MAGIC ### 🔄 Implementation Roadmap:
-# MAGIC 
+# MAGIC
 # MAGIC **Phase 1 (Immediate)**: 
 # MAGIC - Deploy forecasts to inventory management systems
 # MAGIC - Set up daily forecast refresh schedule
-# MAGIC 
+# MAGIC
 # MAGIC **Phase 2 (1-2 weeks)**:
 # MAGIC - Integrate with supply chain planning tools
 # MAGIC - Implement automated alerting for high-risk items
-# MAGIC 
+# MAGIC
 # MAGIC **Phase 3 (1-2 months)**:
 # MAGIC - Expand to full product catalog
 # MAGIC - Add external data sources (weather, events, promotions)
-# MAGIC 
+# MAGIC
 # MAGIC ### 📍 Data Assets Created:
 # MAGIC ```
 # MAGIC Catalog: {catalog_name}
@@ -573,9 +580,9 @@ print(f"Ready to revolutionize your supply chain and inventory operations.")
 # COMMAND ----------
 
 # MAGIC %md ## 🎉 Success! Business Intelligence Ready
-# MAGIC 
+# MAGIC
 # MAGIC **Your demand forecasting solution is now operational and providing business value!**
-# MAGIC 
+# MAGIC
 # MAGIC All components are running on serverless compute with Unity Catalog governance.
 
 # COMMAND ----------

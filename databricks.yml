@@ -21,7 +21,7 @@ variables:
 resources:
   jobs:
     demand_forecasting_workflow:
-      name: "Fine-Grained Demand Forecasting Pipeline"
+      name: "ST Logs Fine-Grained Demand Forecasting Pipeline"
       description: "Scalable demand forecasting using Prophet with Unity Catalog and serverless compute - split into logical components"
       
       email_notifications:

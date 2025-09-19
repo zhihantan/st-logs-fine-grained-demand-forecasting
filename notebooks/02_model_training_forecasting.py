@@ -1,27 +1,27 @@
 # Databricks notebook source
 # MAGIC %md 
 # MAGIC # AI-Powered Demand Forecasting - Intelligent Prediction Engine
-# MAGIC 
+# MAGIC
 # MAGIC ## 🤖 Advanced Analytics Solution
-# MAGIC 
+# MAGIC
 # MAGIC Transform your retail operations with **intelligent demand prediction** 
 # MAGIC that learns from historical patterns:
 # MAGIC - **AI-driven forecasting** across thousands of store-product combinations
 # MAGIC - **Seasonal intelligence** that adapts to holiday patterns and trends
 # MAGIC - **Risk-aware predictions** with confidence intervals for safety stock
 # MAGIC - **Automated model training** that scales to enterprise product catalogs
-# MAGIC 
+# MAGIC
 # MAGIC ## 📈 Industry Innovation
-# MAGIC 
+# MAGIC
 # MAGIC ```
 # MAGIC ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 # MAGIC │  Sales History  │───▶│  AI Forecasting │───▶│ Business Actions│
 # MAGIC │  ✅ Foundation  │    │ 🔄 Current step │    │  ⏳ Coming next │
 # MAGIC └─────────────────┘    └─────────────────┘    └─────────────────┘
 # MAGIC ```
-# MAGIC 
+# MAGIC
 # MAGIC ## 🎯 Smart Forecasting Capabilities
-# MAGIC 
+# MAGIC
 # MAGIC - **Pattern Recognition**: Automatically detects seasonal, weekly, daily trends
 # MAGIC - **Demand Volatility Management**: Handles irregular patterns and disruptions
 # MAGIC - **Uncertainty Quantification**: Provides confidence ranges for inventory
@@ -36,7 +36,7 @@
 
 # DBTITLE 1,Install Required Libraries
 # Install libraries for serverless compute
-# MAGIC %pip install prophet>=1.1.5 plotly>=5.17.0 scikit-learn>=1.3.0
+%pip install prophet>=1.1.5 plotly>=5.17.0 scikit-learn>=1.3.0
 
 # COMMAND ----------
 
@@ -66,9 +66,15 @@ print("📚 Libraries imported successfully")
 
 # DBTITLE 1,Configure Forecasting Parameters
 # Get parameters from job or use defaults
-catalog_name = dbutils.widgets.get("catalog_name") if dbutils.widgets.get("catalog_name") else "dev_demand_forecasting"
-schema_name = dbutils.widgets.get("schema_name") if dbutils.widgets.get("schema_name") else "forecasting"
+try:
+    catalog_name = dbutils.widgets.get("catalog_name")
+except Exception:
+    catalog_name = "dev_demand_forecasting"
 
+try:
+    schema_name = dbutils.widgets.get("schema_name")
+except Exception:
+    schema_name = "forecasting"
 # Forecasting parameters - optimized for faster execution
 FORECAST_HORIZON_DAYS = 15  # Reduced from 30 for faster processing
 MIN_HISTORY_DAYS = 90
@@ -92,7 +98,7 @@ spark = SparkSession.builder.getOrCreate()
 # COMMAND ----------
 
 # MAGIC %md ## 📊 Retail Sales Data Analysis
-# MAGIC 
+# MAGIC
 # MAGIC ### Historical Sales Pattern Analysis
 # MAGIC Loading and analyzing your retail sales history to identify forecasting opportunities and data quality.
 
@@ -150,9 +156,9 @@ print(f"\n🎯 {sufficient_data_count}/{len(validation_results)} product-store c
 # COMMAND ----------
 
 # MAGIC %md ## 🧠 AI-Powered Demand Prediction Engine
-# MAGIC 
+# MAGIC
 # MAGIC ### Intelligent Forecasting at Scale
-# MAGIC 
+# MAGIC
 # MAGIC Deploy advanced machine learning to predict demand across your entire product portfolio.
 # MAGIC Our AI engine will:
 # MAGIC 1. **Learn from sales patterns** (seasonality, trends, promotions)
@@ -246,9 +252,9 @@ print("✅ AI demand prediction engine ready")
 # COMMAND ----------
 
 # MAGIC %md ## 🚀 Deploy AI Forecasting at Enterprise Scale
-# MAGIC 
+# MAGIC
 # MAGIC ### Intelligent Demand Prediction Across Your Retail Portfolio
-# MAGIC 
+# MAGIC
 # MAGIC Launch AI-powered forecasting across your stores and products. The system automatically trains specialized models for each product-location combination.
 
 # COMMAND ----------
@@ -429,7 +435,7 @@ print(f"🎯 Forecast generation complete: {forecast_count:,} predictions ready 
 # COMMAND ----------
 
 # MAGIC %md ## 📊 AI Forecasting Performance Summary
-# MAGIC 
+# MAGIC
 # MAGIC ### Business Impact Assessment
 
 # COMMAND ----------
@@ -471,23 +477,23 @@ else:
 # COMMAND ----------
 
 # MAGIC %md ## 📋 Summary & Next Steps
-# MAGIC 
+# MAGIC
 # MAGIC ### ✅ AI Forecasting Engine Deployed:
-# MAGIC 
+# MAGIC
 # MAGIC 1. **🧠 Advanced AI Models**: Specialized demand prediction for each product-store
 # MAGIC 2. **🔮 Intelligent Forecasts**: 30-day demand predictions with confidence ranges  
 # MAGIC 3. **⚡ Enterprise Scale**: Automatic scaling across thousands of products
 # MAGIC 4. **💾 Business Integration**: Forecasts available to all planning teams
 # MAGIC 5. **📊 Quality Assurance**: Validated predictions ready for inventory planning
-# MAGIC 
+# MAGIC
 # MAGIC ### 🔄 Business Intelligence Next:
-# MAGIC 
+# MAGIC
 # MAGIC **Final Step**: Executive Insights & Action Planning
 # MAGIC - Interactive demand visualization dashboards
 # MAGIC - Inventory optimization recommendations
 # MAGIC - Supply chain planning insights
 # MAGIC - Executive KPI reporting and ROI analysis
-# MAGIC 
+# MAGIC
 # MAGIC ### 📍 Output Location:
 # MAGIC ```
 # MAGIC Catalog: {catalog_name}
@@ -499,9 +505,9 @@ else:
 # COMMAND ----------
 
 # MAGIC %md ## 🎉 AI Forecasting Engine Live!
-# MAGIC 
+# MAGIC
 # MAGIC **Your intelligent demand prediction system is operational!**
-# MAGIC 
+# MAGIC
 # MAGIC Ready to transform forecasts into actionable business insights and inventory optimization strategies.
 
 # COMMAND ----------
