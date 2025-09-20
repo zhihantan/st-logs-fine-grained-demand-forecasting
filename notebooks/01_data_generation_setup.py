@@ -1,14 +1,18 @@
 # Databricks notebook source
 # MAGIC %md 
-# MAGIC # Retail Demand Forecasting - Data Foundation Setup
+# MAGIC # Product Demand Forecasting - Data Foundation Setup
 # MAGIC
 # MAGIC ## 🏪 Industry Challenge
 # MAGIC
-# MAGIC **Retail organizations lose millions annually due to poor demand planning:**
+# MAGIC **Organizations lose millions annually due to poor demand planning:**
 # MAGIC - **$1.1 trillion globally** lost to out-of-stock scenarios
 # MAGIC - **20-40%** of inventory investment tied up in slow-moving stock
 # MAGIC - **65%** of retailers struggle with demand volatility
 # MAGIC - **Manual forecasting** leads to 40-50% forecast errors
+# MAGIC
+# MAGIC ## Potential ST Logistics Use case
+# MAGIC
+# MAGIC **While being the key partner for Supply Chain solutions to the Singapore Armed Forces (SAF) for more than 20 years, ST Logistics provides important military goods to the SAF, which are sold via retail stores like e-marts, 3rd-party stores, etc. Having a good grasp of the demand numbers would help optimize the supply chain operations to provide these goods.**
 # MAGIC
 # MAGIC ## 🎯 Solution Overview
 # MAGIC
@@ -92,7 +96,7 @@ NUM_ITEMS = 25   # Reduced from 50 for faster processing
 START_DATE = '2020-01-01'
 END_DATE = '2025-7-31'
 
-print("🔧 Retail Business Scope (Optimized):")
+print("🔧 Business Scope (Optimized):")
 print(f"   🏪 Store locations: {NUM_STORES}")
 print(f"   📦 Product SKUs per store: {NUM_ITEMS}")
 print(f"   📅 Historical sales period: {START_DATE} to {END_DATE}")
@@ -106,7 +110,7 @@ spark = SparkSession.builder.getOrCreate()
 
 # MAGIC %md ## 🏛️ Enterprise Data Foundation
 # MAGIC
-# MAGIC ### Retail Data Architecture
+# MAGIC ### Sales Data Architecture
 # MAGIC Setting up secure, governed data infrastructure for enterprise forecasting:
 # MAGIC - **Data governance** with role-based access controls
 # MAGIC - **Audit trails** for regulatory compliance
@@ -123,12 +127,12 @@ spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog_name}")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.{schema_name}")
 
 print(f"✅ Business catalog '{catalog_name}' ready")
-print(f"✅ Forecasting workspace '{schema_name}' created")
+print(f"✅ Forecasting schema '{schema_name}' created")
 
 # COMMAND ----------
 
 # DBTITLE 1,Create Retail Data Tables
-print("📊 Creating retail sales and forecasting tables...")
+print("📊 Creating sales and forecasting tables...")
 
 # Create historical sales data table
 spark.sql(f"""
@@ -321,7 +325,7 @@ print(f"📊 Rows written: {final_df.count():,}")
 
 # COMMAND ----------
 
-# MAGIC %md ## 📊 Retail Data Quality Assessment
+# MAGIC %md ## 📊 Sales Data Quality Assessment
 # MAGIC
 # MAGIC ### Sales Data Validation
 # MAGIC Ensuring our retail sales data meets enterprise standards for accurate forecasting.
@@ -400,11 +404,11 @@ print("\n🎯 Retail sales data validated and ready for demand forecasting!")
 
 # MAGIC %md ## 🎉 Ready for Demand Forecasting
 # MAGIC
-# MAGIC **Your retail sales data foundation is operational!**
+# MAGIC **Your sales data foundation is operational!**
 # MAGIC
 # MAGIC Ready to apply advanced machine learning for accurate demand predictions across your entire product portfolio.
 
 # COMMAND ----------
 
 # Return completion status for workflow orchestration
-dbutils.notebook.exit("SUCCESS: Retail data foundation ready for demand forecasting") 
+dbutils.notebook.exit("SUCCESS: Sales data foundation ready for demand forecasting") 
