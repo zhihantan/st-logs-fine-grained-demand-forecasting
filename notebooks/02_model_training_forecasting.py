@@ -36,7 +36,7 @@
 
 # DBTITLE 1,Install Required Libraries
 # Install libraries for serverless compute
-%pip install prophet>=1.1.5 plotly>=5.17.0 scikit-learn>=1.3.0
+%pip install prophet>=1.1.5 plotly>=5.17.0 scikit-learn>=1.3.0 mlflow
 
 # COMMAND ----------
 
@@ -248,6 +248,20 @@ def forecast_store_item(pdf):
         return pd.DataFrame()
 
 print("✅ AI demand prediction engine ready")
+
+# COMMAND ----------
+
+import mlflow
+import mlflow.pyfunc
+
+class ProphetWrapper(mlflow.pyfunc.PythonModel):
+    def load_context(self, context):
+        self.model = model
+    def predict(self, context, model_input):
+        return self.model.predict(model_input)
+
+with mlflow.start_run():
+    mlflow.pyfunc.log_model("prophet_model", python_model=ProphetWrapper())
 
 # COMMAND ----------
 
